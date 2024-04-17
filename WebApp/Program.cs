@@ -1,7 +1,10 @@
+using Infrastructure.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
-
+builder.Services.AddDbContext<ApplicationContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("WebApp_Database")));
 
 
 var app = builder.Build();
