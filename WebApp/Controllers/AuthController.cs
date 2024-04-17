@@ -37,11 +37,11 @@ public class AuthController(UserManager<UserEntity> userManager, SignInManager<U
     [HttpPost]
     public async Task<IActionResult> SignIn(SignInViewModel model, string returnUrl)
     {
-       if (ModelState.IsValid) 
+        if (ModelState.IsValid)
         {
-            if ((_signInManager.PasswordSignInAsync(model.Email, model.Password,model.IsPresistent, false)).Succeeded)
-                    return LocalRedirect(returnUrl);
-        
+            if ((await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.IsPersistent, false)).Succeeded)
+                return LocalRedirect(returnUrl);
+
         }
         ViewData["ReturnUrl"] = returnUrl;
         ViewData["StatusMessage"] = "Incorrect email or password";
