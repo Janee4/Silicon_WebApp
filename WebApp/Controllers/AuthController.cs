@@ -1,16 +1,17 @@
-﻿using Infrastructure.Entities;
+﻿using Infrastructure.Contexts;
+using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WebApp.ViewModels;
 
 namespace WebApp.Controllers;
 
-public class AuthController(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager) : Controller
+public class AuthController(UserManager<UserEntity> userManager, SignInManager<UserEntity> signInManager, ApplicationContext context) : Controller
 {
 
     private readonly UserManager<UserEntity> _userManager = userManager;
     private readonly SignInManager<UserEntity> _signInManager = signInManager;
-
+    private readonly ApplicationContext _context = context;
     public IActionResult SignUp()
     {
         return View();
@@ -19,9 +20,16 @@ public class AuthController(UserManager<UserEntity> userManager, SignInManager<U
 
 
     [HttpPost]
-    public async Task <IActionResult> SignUp(SignUpViewModel model)
+    public async Task<IActionResult> SignUp(SignUpViewModel model)
     {
-        return RedirectToAction("Home", "Default");
+
+        if (ModelState.IsValid)
+        {
+
+        }
+
+        return View(model);
+
     }
 
 
