@@ -26,8 +26,9 @@ public class AuthController(UserManager<UserEntity> userManager, SignInManager<U
 
 
 
-    public IActionResult SignIn()
+    public IActionResult SignIn(string returnUrl)
     {
+        ViewData["ReturnUrl"] = returnUrl ?? "/"; //är return null så får den en "/" slash.
         return View();
     }
 
@@ -38,12 +39,13 @@ public class AuthController(UserManager<UserEntity> userManager, SignInManager<U
     {
        if (ModelState.IsValid) 
         {
-        
+            if ((_signInManager.PasswordSignInAsync(model.Email, model.Password,model.IsPresistent, false)).Succeeded)
+                    return LocalRedirect(returnUrl);
         
         }
-
-
-        return RedirectToAction("Home", "Default");
+        ViewData["ReturnUrl"] = returnUrl;
+        ViewData["StatusMessage"] = "Incorrect email or password";
+        return View(model);
     }
 
 
