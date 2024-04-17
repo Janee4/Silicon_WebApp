@@ -1,7 +1,10 @@
-﻿namespace Infrastructure.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Infrastructure.Entities;
 
 public class AdressEntity
 {
+    [Key]
     public int Id { get; set; }
 
     public string AdressLine_1 { get; set; } = null!;
