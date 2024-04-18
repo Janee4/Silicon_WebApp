@@ -3,20 +3,23 @@
     ViewData["Title"] = "Sign Up";
 }
 
-<section class=" " signup">
+<section class="signup">
     <div class="container">
+
         @if (!string.IsNullOrEmpty(ViewData["StatusMessage"]?.ToString()))
         {
             <div class="alert alert-danger">
                 @ViewData["StatusMessage"]
             </div>
         }
+
         <form method="post" asp-action="SignUp" asp-controller="Auth" novalidate>
             <h1>Create Account</h1>
             <p>Already have an account? <a asp-action="SignIn" asp-controller="Auth">Sign in here</a></p>
 
+
             <div class="form-content">
-                <div id="form-firstName" class="input-group">
+                <div id="form-firstname" class="input-group">
                     <label asp-for="FirstName"></label>
                     <input asp-for="FirstName" />
                     <span asp-validation-for="FirstName"></span>
@@ -39,17 +42,17 @@
                 <div id="form-confirmpassword" class="input-group">
                     <label asp-for="ConfirmPassword"></label>
                     <input asp-for="ConfirmPassword" />
-                    <span asp-validation-for="Password"></span>
+                    <span asp-validation-for="ConfirmPassword"></span>
                 </div>
                 <div id="form-checkbox" class="checkbox-group">
                     <div class="input-group">
-                        <label asp-for="TermsAndConditions"></label>
                         <input asp-for="TermsAndConditions" />
+                        <label asp-for="TermsAndConditions"></label>
                     </div>
                     <span asp-validation-for="TermsAndConditions"></span>
                 </div>
                 <div id="form-button">
-                    <button type="submit" class="btn btn-theme"><i class="fa-regular fa-arrow-left-to-bracket"></i>Sign in</button>
+                    <button type="submit" class="btn btn-theme"><i class="fa-regular fa-arrow-left-to-bracket"></i>Sign up</button>
                 </div>
             </div>
         </form>

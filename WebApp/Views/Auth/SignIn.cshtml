@@ -11,7 +11,7 @@
                 @ViewData["StatusMessage"]
             </div>
         }
-        <form method="post" asp-action="SignIn" asp-controller="Auth" asp-route-ReturnUrl="@ViewData" ["ReturnUrl"]" novalidate>
+        <form method="post" asp-action="SignIn" asp-controller="Auth" asp-route-ReturnUrl="@ViewData["ReturnUrl"]" novalidate>
             <h1>Welcome back</h1>
             <p>Don't have an account yet? <a asp-action="SignUp" asp-controller="Auth">Sign up here</a></p>
 

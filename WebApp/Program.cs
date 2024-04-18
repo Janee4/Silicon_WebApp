@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddDbContext<ApplicationContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("WebApp_Database")));
 builder.Services.AddIdentity<UserEntity, IdentityRole>(x =>
+
 {
     x.SignIn.RequireConfirmedPhoneNumber = false;
     x.User.RequireUniqueEmail = true;

@@ -9,7 +9,7 @@ public class AdressEntity
 
     public string AdressLine_1 { get; set; } = null!;
 
-    public string AdressLine_2 { get; set; }
+    public string? AdressLine_2 { get; set; }
 
     public string PostalCode { get; set; } = null!;
 

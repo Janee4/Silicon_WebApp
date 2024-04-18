@@ -8,11 +8,11 @@ public class UserEntity : IdentityUser
 
     public string LastName { get; set; } = null!;
 
-    public string ProfileImage { get; set; } = "avtar.jpg";
+    public string? ProfileImage { get; set; } = "avtar.jpg";
 
-    public string Bio {  get; set; } 
+    public string? Bio { get; set; } = "";
 
-    public int? AdressId { get; set; }  
+    public int? AdressId { get; set; }
 
     public AdressEntity? Adress { get; set; }
 
