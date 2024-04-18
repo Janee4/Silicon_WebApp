@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebApp.ViewModels;
 
 namespace WebApp.Controllers;
 
@@ -6,7 +7,8 @@ public class AccountController : Controller
 {
     public IActionResult Details()
     {
-        return View();
+        var viewModel = new AccountDetailsViewModel();
+        return View(viewModel);
     }
 
     [HttpPost]
