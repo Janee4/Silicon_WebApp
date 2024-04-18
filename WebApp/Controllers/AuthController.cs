@@ -42,10 +42,12 @@ public class AuthController(UserManager<UserEntity> userManager, SignInManager<U
                 {
                     if ((await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false)).Succeeded)
                         return LocalRedirect("/");
+                    else
+                        return LocalRedirect("/signin");
                 }
                 else
                 {
-                    return LocalRedirect("/");
+                    ViewData["StatusMessage"] = "Something went wrong. Try again later or contact customer service";
                 }
             
             }
