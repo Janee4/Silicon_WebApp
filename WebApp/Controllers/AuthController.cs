@@ -2,6 +2,7 @@
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApp.ViewModels;
 
 namespace WebApp.Controllers;
@@ -25,7 +26,34 @@ public class AuthController(UserManager<UserEntity> userManager, SignInManager<U
 
         if (ModelState.IsValid)
         {
+            if (!await _context.Users.AnyAsync(x => x.Email == model.Email))
+            {
+                var userEntity = new UserEntity
 
+                {
+                    Email = model.Email,
+                        UserName = model.Email,
+                        FirstName = model.FirstName,
+                        LastName = model.LastName
+
+                };
+
+                if ((await _userManager.CreateAsync(userEntity, model.Password)).Succeeded)
+                {
+                    if ((await _signInManager.PasswordSignInAsync(model.Email, model.Password, false, false)).Succeeded)
+                        return LocalRedirect("/");
+                }
+                else
+                {
+                    return LocalRedirect("/");
+                }
+            
+            }
+            else
+            {
+                ViewData["StatusMessage"] = "User with the same email already exists";
+            }
+            
         }
 
         return View(model);
