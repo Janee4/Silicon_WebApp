@@ -12,14 +12,21 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public IActionResult UpdateBasicInfo()
+    public IActionResult UpdateBasicInfo(AccountDetailsViewModel model)
     {
+
+        if (TryValidateModel(model.Basic!))
+        {
+
+
+        }
+
         TempData["StatusMessage"] = "Unable to save information.";
         return RedirectToAction("Details", "Account");
     }
 
     [HttpPost]
-    public IActionResult UpdateAdressInfo()
+    public IActionResult UpdateAdressInfo(AccountDetailsViewModel model)
     {
         TempData["StatusMessage"] = "Unable to save information.";
         return RedirectToAction("Details", "Account");
