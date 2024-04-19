@@ -31,6 +31,8 @@ public class AccountBasicInfo
 
     [Display(Name = "Bio (optional)", Prompt = "Add a short bio..")]
     public string? Bio { get; set; }
+
+    public byte[]? ProfileImage { get; set; }
 }
 
 public class AccountAdressInfo
