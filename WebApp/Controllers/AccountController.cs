@@ -23,9 +23,31 @@ public class AccountController : Controller
         _context = context;
     }
 
-    public IActionResult Details()
+    public async Task<IActionResult> Details()
     {
-        var viewModel = new AccountDetailsViewModel();
+        var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+        var user = await _context.Users.Include(i => i.Adress).FirstOrDefaultAsync(x => x.Id == nameIdentifier);
+
+        var viewModel = new AccountDetailsViewModel
+        {
+            Basic = new AccountBasicInfo
+            {
+                FirstName = user!.FirstName,
+                LastName = user!.LastName,
+                Email = user!.Email!,
+                PhoneNumber = user!.PhoneNumber,
+                Bio = user.Bio,
+            },
+            Adress = new AccountAdressInfo
+            {
+                AdressLine_1 = user.Adress?.AdressLine_1!,
+                AdressLine_2 = user.Adress?.AdressLine_2!,
+                PostalCode = user.Adress?.PostalCode!,
+                City = user.Adress?.City!
+            }
+
+        };
+
         return View(viewModel);
     }
 
@@ -73,7 +95,7 @@ public class AccountController : Controller
         if (TryValidateModel(model.Adress!))
         {
             var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
-            var user = await _context.Users.Include (i=> i.Adress).FirstOrDefaultAsync(x => x.Id == nameIdentifier);
+            var user = await _context.Users.Include(i => i.Adress).FirstOrDefaultAsync(x => x.Id == nameIdentifier);
             if (user != null)
             {
                 try
@@ -98,7 +120,7 @@ public class AccountController : Controller
 
                     _context.Update(user);
                     await _context.SaveChangesAsync();
-                    TempData["StatusMessage"] = "Updated basic address successfully.";
+                    TempData["StatusMessage"] = "Updated address information successfully.";
                 }
 
                 catch
