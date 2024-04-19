@@ -4,7 +4,7 @@ namespace WebApp.ViewModels;
 
 public class AccountDetailsViewModel
 {
-    public AccountBasicInfo? Basic {  get; set; }
+    public AccountBasicInfo? Basic { get; set; }
 
     public AccountAdressInfo? Adress { get; set; }
 }

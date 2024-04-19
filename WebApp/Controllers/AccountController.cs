@@ -89,7 +89,7 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> UpdateAdressInfo(AccountDetailsViewModel model)
+    public async Task<IActionResult> UpdateAddressInfo(AccountDetailsViewModel model)
     {
 
         if (TryValidateModel(model.Adress!))
