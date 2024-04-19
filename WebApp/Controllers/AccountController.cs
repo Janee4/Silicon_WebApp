@@ -28,6 +28,8 @@ public class AccountController : Controller
         var nameIdentifier = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
         var user = await _context.Users.Include(i => i.Adress).FirstOrDefaultAsync(x => x.Id == nameIdentifier);
 
+
+
         var viewModel = new AccountDetailsViewModel
         {
             Basic = new AccountBasicInfo
@@ -60,12 +62,12 @@ public class AccountController : Controller
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
-                user.FirstName = user.FirstName;
-                user.LastName = user.LastName;
-                user.Email = user.Email;
-                user.PhoneNumber = user.PhoneNumber;
-                user.UserName = user.UserName;
-                user.Bio = user.Bio;
+                user.FirstName = model.Basic!.FirstName;
+                user.LastName = model.Basic!.LastName;
+                user.Email = model.Basic!.Email;
+                user.PhoneNumber = model.Basic!.PhoneNumber;
+                user.UserName = model.Basic!.Email;
+                user.Bio = model.Basic!.Bio;
 
                 var result = await _userManager.UpdateAsync(user);
                 if (result.Succeeded)
